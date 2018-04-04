@@ -5,25 +5,24 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="./static/css/bootstrap.min.css">
- <script src='.static/js/jquery-3.3.1.min.js'></script>
+   <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+  	<script src='static/js/jquery-3.3.1.min.js'/></script>
   <script>
-    $(document).ready(function(){
-    $("#email").click(function(){
-        $("div").animate({
-            
-            height: '150px',
-            width: '150px'
-        });
-    });
-});
+	    $(document).ready(function(){
+	    	$("#email").click(function(){
+		        $("div").animate({            
+		            height: '550px',
+		            width: '550px'
+		        });
+	    	});
+		});
 </script>
 </head>
 <body>
 
 <div class="container">
   <h2>Vertical (basic) form</h2>
-  <form action="/action_page.php">
+  <form action="">
     <div class="form-group">
       <label for="email">Email:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
