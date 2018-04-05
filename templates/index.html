@@ -13,7 +13,8 @@
 <body >
   <br>
   <div class="container">
-  <form action="./signup" style="border: 1px" method="POST">
+  <form  accept-charset="utf-8" enctype = "multipart/form-data" method="POST" action="./signup">
+
      <div class="row">
       <div class="form-group">
       
@@ -22,41 +23,48 @@
     <input type="file" accept="image/*" onchange="loadFile(event)" name="file"> <br><br>
     </div>
     <div class="col-sm-8">
-<div class="form-group">
+<div class="form-group row">
+  <div class="col-xs-4">
     <label for="name"><b>Name</b></label>
     <input type="text" name="name" class="form-control" placeholder="Enter name" required width="50px"><br>
-</div>
-<div class="form-group">
+</div></div>
+<div class="form-group row">
+  <div class="col-xs-4">
     <label for="username"><b>Username</b></label>
     <input type="text"  name="username" class="form-control" placeholder="Enter username" required><br>
-</div>
-<div class="form-group">
+</div></div>
+<div class="form-group row">
+  <div class="col-xs-4">
     <label for="pwd"><b>Password</b></label>
     <input type="Password" name="password" class="form-control" placeholder="Minimum 8 characters" min="8" required><br>
-</div>
-<div class="form-group">
+</div></div>
+<div class="form-group row">
+  <div class="col-xs-4">
     <label for="cpwd"><b>Confirm Password</b></label>
     <input type="Password" name="confirm_password" class="form-control" placeholder="Enter password again" required><br>
-  </div>
+  </div></div>
 </div>
 </div>
-<div class="form-group">
-
+<div class="form-group row">
+<div class="col-xs-4">
     <label for="email"><b>Email</b></label>
     <input type="email" name="email" class="form-control" placeholder="Example:xyz@abc.com" required><br>
-</div>
-<div class="form-group">
+</div></div>
+<div class="form-group row">
+  <div class="col-xs-4">
     <label for="dob"><b>Date of Birth</b></label>
     <input type="Date" name="dob" class="form-control" placeholder="DD/MM/YYYY" required><br>
-</div>
-<div class="form-group">
+</div></div>
+<div class="form-group row">
+  <div class="col-xs-4">
     <label for="ph"><b>Phone Numer</b></label>
     <input type="number" name="phone_no" class="form-control" placeholder="Enter 10 digits" required><br>
-</div>
- <div class="form-group">
+</div></div></form>
+ <div class="form-group row">
+  <div class="col-xs-4">
   <label for="comment">Address</label>
   <textarea class="form-control" rows="5" id="address"></textarea>
-</div> 
+</div> </div>
 </div>
    <button type="Submit" class="btn btn-success">Submit</button>
    <button type="reset" class="btn btn-danger">Cancel</button>
