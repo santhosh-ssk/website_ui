@@ -9,10 +9,11 @@
   <script src="static/js/jquery-3.3.1.min.js"></script>
   <script src="static/js/bootstrap.min.js"></script>
 </head>
-<body><center>
+<body ><center>
   <form action="#" style="border: 1px">
+    <img id="output" style="height:100px; "/> 
     <input type="file" accept="image/*" onchange="loadFile(event)"> 
-    <img id="output"/> 
+    
 
     <label for="name"><b>Name</b></label>
     <input type="text" name="name" placeholder="Enter name" required><br><br>
@@ -34,7 +35,7 @@
     <input type="Date" name="dob" placeholder="DD/MM/YYYY" required><br><br>
 
     <label for="ph"><b>Phone Numer</b></label>
-    <input type="number" name="ph" placeholder="Enter 10 digits" required>
+    <input type="number" name="ph" placeholder="Enter 10 digits" required><br><br>
 
     <label for="address"><b>Address</b></label>
     <input type="text" name="address" placeholder="Enter address" required><br><br>
