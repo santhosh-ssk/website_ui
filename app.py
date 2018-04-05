@@ -12,9 +12,9 @@ app=Flask(__name__)
 @app.route("/")
 def home():
 	return render_template('index.html')
-@app.route("/signup")
+@app.route("/signup",methods=["POST"])
 def signup():
-	print(request.form)
+	print(request.form["name"])
 	return jsonify(response="success")
 if __name__=="__main__":
 	app.run(debug=True)
