@@ -14,7 +14,10 @@ def home():
 	return render_template('index.html')
 @app.route("/signup",methods=["POST"])
 def signup():
-	print(request.form.to_dict())
+	user_data=request.form.to_dict()
+	user_data.pop('confirm_password')
+	print(user_data,request.files.to_dict())
+
 	return jsonify(response="success")
 if __name__=="__main__":
 	app.run(debug=True)
