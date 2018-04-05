@@ -12,7 +12,7 @@ app=Flask(__name__)
 
 @app.route("/")
 def home():
-	return render_template('index.html')
+	return render_template('index.html',flash_message=None)
 @app.route("/signup",methods=["POST"])
 def signup():
 	user_data=request.form.to_dict()
@@ -31,7 +31,7 @@ def signup():
 		user_token.save()
 		return jsonify(response="success")
 	except:
-		return jsonify(response="user id exist")
+		return render_template('index.html',flash_message="User id exist")
 	
 if __name__=="__main__":
 	app.run(debug=True)

@@ -25,10 +25,12 @@
     </form>
   </div>
 </nav>
+{%if flash_message%}
 <div class="alert alert-warning">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Warning!</strong> Indicates a warning that might need attention.
+  <strong>Warning!</strong> {{flash_message}} .
 </div>
+{%endif%}
 
 <div class="container">
   <div class="row">
