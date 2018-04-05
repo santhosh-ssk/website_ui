@@ -14,10 +14,14 @@
   <br>
   <div class="container">
   <form action="./signup" style="border: 1px" method="POST">
-     <div class="form-group">
+     <div class="row">
+      <div class="form-group">
+      
+        <div class="col-sm-4">
     <img id="output" class="img-rounded" style="height:100px; "/> 
-    <input type="file" accept="image/*" onchange="loadFile(event)"> <br><br>
-    
+    <input type="file" accept="image/*" onchange="loadFile(event)" name="file"> <br><br>
+    </div>
+    <div class="col-sm-8">
 <div class="form-group">
     <label for="name"><b>Name</b></label>
     <input type="text" name="name" class="form-control" placeholder="Enter name" required width="50px"><br>
@@ -28,11 +32,13 @@
 </div>
 <div class="form-group">
     <label for="pwd"><b>Password</b></label>
-    <input type="Password" name="pwd" class="form-control" placeholder="Minimum 8 characters" min="8" required><br>
+    <input type="Password" name="password" class="form-control" placeholder="Minimum 8 characters" min="8" required><br>
 </div>
 <div class="form-group">
     <label for="cpwd"><b>Confirm Password</b></label>
-    <input type="Password" name="cpwd" class="form-control" placeholder="Enter password again" required><br>
+    <input type="Password" name="confirm_password" class="form-control" placeholder="Enter password again" required><br>
+  </div>
+</div>
 </div>
 <div class="form-group">
 
