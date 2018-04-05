@@ -16,7 +16,14 @@ def home():
 def signup():
 	user_data=request.form.to_dict()
 	user_data.pop('confirm_password')
-	print(user_data,request.files.to_dict())
+	file=request.files.to_dict()['file']
+	from data_model import User
+	user=User(**user_data)
+	user.profile_image.put(file.read())
+	user.profile_image_name=file.filename
+	user.profile_image_type=file.filename.split('.')[1]
+	print(user.to_json())
+	user.save()
 
 	return jsonify(response="success")
 if __name__=="__main__":
