@@ -1,5 +1,6 @@
 from flask import Flask,render_template,jsonify,request
 from mongoengine import connect
+import uuid
 connect(
     db='website_ui',
     username='admin',
@@ -22,9 +23,15 @@ def signup():
 	user.profile_image.put(file.read())
 	user.profile_image_name=file.filename
 	user.profile_image_type=file.filename.split('.')[1]
-	print(user.to_json())
-	user.save()
-
-	return jsonify(response="success")
+	#print(user.to_json())
+	try:
+		user.save()
+		from data_model import User_token
+		user_token=User_token(username=user_data['username'],token=str(uuid.uuid4())+str(uuid.uuid4()))
+		user_token.save()
+		return jsonify(response="success")
+	except:
+		return jsonify(response="user id exist")
+	
 if __name__=="__main__":
 	app.run(debug=True)

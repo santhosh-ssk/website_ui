@@ -2,3 +2,5 @@ Flask
 gunicorn
 requests
 mongoengine
+uuid
+base64
