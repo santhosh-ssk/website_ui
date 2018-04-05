@@ -1,7 +1,7 @@
 from flask import Flask,render_template,jsonify,request
 from mongoengine import connect
 import uuid
-import base64
+import base64,io
 connect(
     db='website_ui',
     username='admin',
@@ -40,7 +40,9 @@ def login():
 	from data_model import User
 	user=User.objects(username=login['username'],password=login['password']).first()
 	if user:
-		return render_template('user.html',user={"name":user.name,"email":user.email,"phone":user.phone_no,"address":user.address,"dob":user.dob,"username":user.username},profile_image=base64.b64encode(user.profile_image.read()),profile_image_type=user.profile_image_type)
+		#print(base64.b64encode(user.profile_image.read()))
+		return render_template('user.html',user={"name":user.name,"email":user.email,"phone":user.phone_no,"address":user.address,"dob":user.dob,"username":user.username},profile_image=(base64.b64encode(user.profile_image.read())).decode(),profile_image_type=user.profile_image_type)
+		
 	else:
 		return render_template('index.html',flash_message="Invalid login id or password")
 

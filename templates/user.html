@@ -11,18 +11,10 @@
    <script> var loadFile = function(event) { var output = document.getElementById('output'); output.src = URL.createObjectURL(event.target.files[0]); }; </script>
 </head>
 <body style="background-image:url(static/images/yes.png);background-size: 100% 100%;background-repeat: no-repeat;">
-  <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-     <form class="navbar-form navbar-right" action="./login" method="POST">
-      <div class="form-group">
-      <label for="user_id" style="color:white"><b>User Id</b></label>
-        <input type="text" class="form-control"  name="name">
-      </div>
-      <div class="form-group">
-      <label for="password" style="color:white"><b>Password</b></label>
-        <input type="password" class="form-control" name="password">
-      <input type="submit" class="btn btn-default" value="login">
-    </form>
+  <nav class="navbar navbar-inverse ">
+  <div class="container-fluid navbar-right">
+      <span style="color: white">Logged as</span>
+<img src="data:image/{{profile_image_type}};base64,{{profile_image}}" height="50px" />
   </div>
 </nav>
 {%if flash_message%}
@@ -32,69 +24,47 @@
 </div>
 {%endif%}
 
+
 <div class="container">
   <div class="row">
-      <div class="col-sm-5"></div>
+
+      <div class="col-sm-5">
+        <img src="data:image/{{profile_image_type}};base64,{{profile_image}}" height="250px" />
+      </div>
+  
       <div class="col-sm-7">
         <div class="container">
-        <form  accept-charset="utf-8" enctype = "multipart/form-data" method="POST" action="./signup">
 
            <div class="row">
-            <div class="form-group">
-            
-              <div class="col-sm-4">
-          <img id="output" src="static/images/upload_img.png" style="height:300px;width:300px; "/ > 
-          <input type="file" accept="image/*" onchange="loadFile(event)" value="upload" name="file" style="margin-top:20px">
            
-          </div>
           <div class="col-sm-8">
       <div class="form-group row">
         <div class="col-xs-4">
-          <label for="name"><b>Name</b></label>
-          <input type="text" name="name" class="form-control" placeholder="Enter name" required width="50px">
+          <label for="name"><b>Name</b></label>{{user['name']}}
       </div></div>
-      <div class="form-group row">
-        <div class="col-xs-4">
-          <label for="username"><b>Username</b></label>
-          <input type="text"  name="username" class="form-control" placeholder="Enter username" required>
-      </div></div>
-      <div class="form-group row">
-        <div class="col-xs-4">
-          <label for="pwd"><b>Password</b></label>
-          <input type="Password" name="password" class="form-control" placeholder="Minimum 8 characters" min="8" required>
-      </div></div>
-      <div class="form-group row">
-        <div class="col-xs-4">
-          <label for="cpwd"><b>Confirm Password</b></label>
-          <input type="Password" name="confirm_password" class="form-control" placeholder="Enter password again" required>
-        </div></div>
-      </div>
-      </div>
+
       <div class="form-group row">
       <div class="col-xs-4">
-          <label for="email"><b>Email</b></label>
-          <input type="email" name="email" class="form-control" placeholder="Example:xyz@abc.com" required>
-      </div></div>
+          <label for="email"><b>Email</b></label>{{user['email']}}
+          </div></div>
+
+
       <div class="form-group row">
         <div class="col-xs-4">
-          <label for="dob"><b>Date of Birth</b></label>
-          <input type="Date" name="dob" class="form-control" placeholder="DD/MM/YYYY" required>
+          <label for="dob"><b>Date of Birth</b></label>{{user['dob']}}
       </div></div>
+
       <div class="form-group row">
         <div class="col-xs-4">
-          <label for="ph"><b>Phone Numer</b></label>
-          <input type="number" name="phone_no" class="form-control" placeholder="Enter 10 digits" required>
+          <label for="ph"><b>Phone Numer</b></label>{{user['phone_no']}}
       </div></div>
+
        <div class="form-group row">
         <div class="col-xs-4">
-        <label for="comment">Address</label>
-        <textarea class="form-control" rows="5" id="address" name="address"></textarea>
+        <label for="comment">Address</label>{{user['address']}}
       </div> </div>
+      
       </div>
-         <input type="submit" value="Submit" class="btn btn-success">
-          <input type="reset" value="Reset" class="btn btn-danger">
-
-        </form>
       </div>
       </div>
   </div>
