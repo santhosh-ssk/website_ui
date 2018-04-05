@@ -1,35 +1,43 @@
 
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="./static/css/bootstrap.min.css">
-  	<script src='static/js/jquery-3.3.1.min.js'/></script>
-  <script>
-	    $(document).ready(function(){
-	    	$("#email").click(function(){
-		        $("div").animate({            
-		            height: '550px',
-		            width: '550px'
-		        });
-	    	});
-		});
-</script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+  <form action="#" style="border: 1px">
+    <input type="file" accept="image/*" onchange="loadFile(event)"> 
+    <img id="output"/> 
 
-<div class="container">
-  <h2>Vertical (basic) form</h2>
-  <form action="">
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-    </div>
-    
-  </form>
-</div>
+    <label for="name"><b>Name</b></label>
+    <input type="text" name="name" placeholder="Enter name" required><br><br>
 
-</body>
-</html>
+    <label for="username"><b>Username</b></label>
+    <input type="text"  name="username" placeholder="Enter username" required><br><br>
+
+    <label for="pwd"><b>Password</b></label>
+    <input type="Password" name="pwd" placeholder="Minimum 8 characters" min="8" required><br><br>
+
+    <label for="cpwd"><b>Confirm Password</b></label>
+    <input type="Password" name="cpwd" placeholder="Enter password again" required><br><br>
+
+
+    <label for="email"><b>Email</b></label>
+    <input type="email" name="email" placeholder="Example:xyz@abc.com" required><br><br>
+
+    <label for="dob"><b>Date of Birth</b></label>
+    <input type="Date" name="dob" placeholder="DD/MM/YYYY" required><br><br>
+
+    <label for="ph"><b>Phone Numer</b></label>
+    <input type="number" name="ph" placeholder="Enter 10 digits" required>
+
+    <label for="address"><b>Address</b></label>
+    <input type="text" name="address" placeholder="Enter address" required><br><br>
+
+    <input type="submit" value="Submit" onclick="alert('Success')">
+    <input type="reset" value="Cancel">
