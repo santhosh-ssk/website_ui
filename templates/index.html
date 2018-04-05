@@ -13,19 +13,19 @@
 <body style="background-image:url(static/images/yes.png)">
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-     <form class="navbar-form navbar-right" action="/action_page.php">
+     <form class="navbar-form navbar-right" action="./login" method="POST">
       <div class="form-group">
       <label for="user_id" style="color:white"><b>User Id</b></label>
-        <input type="text" class="form-control"  name="search">
+        <input type="text" class="form-control"  name="name">
       </div>
       <div class="form-group">
       <label for="password" style="color:white"><b>Password</b></label>
-        <input type="password" class="form-control" name="search">
-      <input type="submit" class="btn btn-default" value="Submit">
+        <input type="password" class="form-control" name="password">
+      <input type="submit" class="btn btn-default" value="login">
     </form>
   </div>
 </nav>
-
+<div style="margin-left:1000px">
   <div class="container">
   <form  accept-charset="utf-8" enctype = "multipart/form-data" method="POST" action="./signup">
 
@@ -86,5 +86,5 @@
 
   </form>
 </div>
-
+</div>
 </body>
