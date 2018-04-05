@@ -32,6 +32,10 @@ def signup():
 		return jsonify(response="success")
 	except:
 		return render_template('index.html',flash_message="User id exist")
-	
+
+@app.route("/login",methods=["POST"])
+def login():
+	print(request.form.to_dict())
+	return jsonify("success")	
 if __name__=="__main__":
 	app.run(debug=True)
