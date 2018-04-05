@@ -10,3 +10,6 @@ class User(Document):
 	phone_no=StringField(required=True)
 	address=StringField(required=True)
 	dob=StringField(required=True)
+class User_token(Document):
+	  username=StringField(required=True,unique=True)
+	  token=StringField(required=True)
