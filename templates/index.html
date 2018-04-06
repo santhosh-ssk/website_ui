@@ -11,7 +11,7 @@
    <script> var loadFile = function(event) { var output = document.getElementById('output'); output.src = URL.createObjectURL(event.target.files[0]); };
    function check_username_availability() {
      // body...
-     alert(username);
+     alert("username");
    }
 
 
@@ -63,7 +63,7 @@
       <div class="form-group row">
         <div class="col-xs-4">
           <label for="username"><b>Username</b></label>
-          <input type="text"  name="username" class="form-control" placeholder="Enter username" required value="username"><br>
+          <input type="text"  name="username" class="form-control" placeholder="Enter username" required  onchange="check_username_availability()"><br>
           <span>User name available</span>
       </div></div>
       <div class="form-group row">
