@@ -70,6 +70,41 @@
                                 infoWindow.setPosition(pos);
             				    infoWindow.setContent('Your Home.');
             				    infoWindow.open(Home_map);
+
+                                Home_map.setOptions({styles:[
+                                            {
+                                                "featureType": "poi",
+                                                "stylers": [
+                                                { "visibility": "off" }
+                                                ]
+                                            },
+                                            {
+                                                "featureType": "poi.attraction",
+                                                "stylers": [
+                                                { "visibility": "on" }
+                                                ]
+                                            },
+                                            {
+                                                "featureType": "poi.park",
+                                                "stylers": [
+                                                { "visibility": "on" }
+                                                ]
+                                            },
+                                            {
+                                                "featureType": "poi.medical",
+                                                "stylers": [
+                                                { "visibility": "on" }
+                                                ]
+                                            },
+                                            {
+                                                "featureType": "poi.place_of_worship",
+                                                "stylers": [
+                                                { "visibility": "on" }
+                                                ]
+                                            }
+                                            
+                                    ]
+                                    });
           				    }, function() {
             					handleLocationError(true, infoWindow, map.getCenter());
           				    });
