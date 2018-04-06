@@ -49,7 +49,7 @@ def login():
 	else:
 		return render_template('index.html',flash_message="Invalid login id or password")
 
-@app.route('/check_username_availability/', methods=['POST'])
+@app.route('/check_username_availability', methods=['POST'])
 def check_username_availability(user_name):
 	user_name=request.json['username']
 	if user_name in Usernames:
