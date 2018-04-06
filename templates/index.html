@@ -10,7 +10,23 @@
   <script src="static/js/bootstrap.min.js"></script>
    <script> var loadFile = function(event) { var output = document.getElementById('output'); output.src = URL.createObjectURL(event.target.files[0]); };
   $(document).ready(function(){
-    $("#username").keyup(function(){
+    $("#username").keyup(function){
+      ($.ajax({
+      url: "./check_username_availability",
+      contentType: "application/json",
+      data: JSON.stringify({
+        "username":$("#username_availability").text(txtVal);
+      }),
+      type: "POST",
+      dataType: "json"
+    }).done(function(json){
+      console.log(json)
+    }).fail(function(xhr,status,errorThrown){
+      console.log("Error: "+ errorThrown);
+      console.log("Status: "+ status);
+      console.dir(xhr);
+    });}
+    {
       var txtVal = this.value; 
         $("#username_availability").text(txtVal);
     });
