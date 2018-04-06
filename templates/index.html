@@ -1,27 +1,85 @@
+<html>
+    <head>
+        <title>Locations of shops</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  	<link rel="stylesheet" href="./static/css/bootstrap.min.css">
-    <meta charset="utf-8">
-  </head>
-  <body>
-  	<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
-    </ul>
-  </div>
-</nav>
-<<<<<<< HEAD
-<div  style="background-image: url('./static/images/Slide.jpg');height: 350px;background-size: 100% 100%;margin-top: -20px;"></div>
-=======
->>>>>>> b7e75e81b9eacbcc527c31eddf9e6eb6dc51c1c1
-</body>
-</html>
+        <style>
+	    	#map {
+		            height: 100%;
+			     }
+	        html, body {
+			        height: 100%;
+			        margin: 0;
+			        padding: 0;
+			           }
+    	</style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h1><center><b>Location of shops</b></center></h1>
+                </div>
+                <div class="col-sm-8" style="padding-left:5%">
+                    <h4>
+                       <nav class="navbar navbar-default">
+                           <ul class="nav navbar-nav">
+                               <li><a href="#" onclick="myHomeLocation()">Home</a></li>
+                               <li><a href="#">Shops</a></li>
+                               <li><a href="#">Hospitals</a></li>
+                               <li><a href="#">Restaurants</a></li>
+                           </ul>
+                       </nav>
+                   </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div id=map></div>
+                <script>
+
+                    function initMap() {
+                        var uluru = {lat: 20.5937, lng:78.9629 };
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 4,
+                        center: uluru
+                        });
+                        var marker=new google.maps.Marker({position:uluru,map:map});
+                    }
+                    
+                    function myHomeLocation()
+                    {
+                        map = new google.maps.Map(document.getElementById('map'), {center: {lat: 20.5937, lng: 78.9629},zoom: 21});
+                        infoWindow = new google.maps.InfoWindow;
+                        if (navigator.geolocation) 
+				        {
+          			    	navigator.geolocation.getCurrentPosition(function(position) 
+					        {
+                                var h_icon={url:'C:/Users/Natarajan/Project/website_ui/static/images/home.png',scaledSize: new google.maps.Size(50, 50)};
+            				    var pos = {lat: position.coords.latitude,lng: position.coords.longitude};
+					            map.setCenter(pos);
+       	    				    var marker=new google.maps.Marker({position:pos,map:map,icon:h_icon});
+            				    infoWindow.setPosition(pos);
+            				    infoWindow.setContent('Your Home.');
+            				    infoWindow.open(map);
+          				    }, function() {
+            					handleLocationError(true, infoWindow, map.getCenter());
+          				    });
+        			    } 
+				        else 
+				        {
+          				    handleLocationError(false, infoWindow, map.getCenter());
+        			    }
+                    }
+                </script>
+                <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4bEjeJlY-pprft7C_p0LM0oPC6yYX468&callback=initMap">
+                </script>
+            </div>
+        </div>
+    </body>
+</hmtl>
