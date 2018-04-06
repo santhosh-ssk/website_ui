@@ -16,7 +16,7 @@ def map():
 def list_shops(lat,log):
 	print(lat,log)
 	resp=requests.request("GET","https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+lat+","+log+"&radius=1000&type=restaurant&key="+maps_api_key)
-	locations=json.loads(resp.content)['results']
+	locations=json.loads((resp.content).decode())['results']
 	respons=list()
 	
 	for location in locations:
