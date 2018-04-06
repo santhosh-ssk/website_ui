@@ -21,6 +21,7 @@
       type: "POST",
       dataType: "json"
     }).done(function(json){
+      $('#result').empty()
       if(json['response'] == 1){
                     //alert("available")
                     $("#result").append('<span style="color: lightgreen">User name is Available</span>');
