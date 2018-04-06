@@ -29,7 +29,7 @@
                     <h4>
                        <nav class="navbar navbar-default">
                            <ul class="nav navbar-nav">
-                               <li><a href="#" onclick="myHomeLocation()">Home</li>
+                               <li><a href="#" onclick="myHomeLocation()">Home</a></li>
                                <li><a href="#">Shops</a></li>
                                <li><a href="#">Hospitals</a></li>
                                <li><a href="#">Restaurants</a></li>
@@ -52,7 +52,7 @@
                     
                     function myHomeLocation()
                     {
-                        map = new google.maps.Map(document.getElementById('map'), {center: {lat: 20.5937, lng: 78.9629},zoom: 8});
+                        map = new google.maps.Map(document.getElementById('map'), {center: {lat: 20.5937, lng: 78.9629},zoom: 21});
                         infoWindow = new google.maps.InfoWindow;
                         if (navigator.geolocation) 
 				        {
