@@ -22,10 +22,10 @@
       dataType: "json"
     }).done(function(json[response]){
       if(json[response] == 0){
-                    Result.html('<span class="success">Available</span>');
+                    Result.html('<span>Available</span>');
                 }
                 else if(json[response] > 0){
-                    Result.html('<span class="error">Taken</span>');
+                    Result.html('<span>Taken</span>');
                 }
       console.log(json)
     }).fail(function(xhr,status,errorThrown){
@@ -34,8 +34,7 @@
       console.dir(xhr);
     });
     
-      var txtVal = this.value; 
-        $("#username_availability").text(txtVal);
+      
     });
 });
 
