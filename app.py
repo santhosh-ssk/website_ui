@@ -50,9 +50,10 @@ def login():
 		return render_template('index.html',flash_message="Invalid login id or password")
 
 @app.route('/check_username_availability', methods=['POST'])
-def check_username_availability(user_name):
+def check_username_availability():
 	user_name=request.json['username']
-	if user_name in Usernames:
+	print(Usernames,request.json)
+	if user_name not in Usernames:
 		return jsonify(response=1)
 	else:
 		return jsonify(response=0)

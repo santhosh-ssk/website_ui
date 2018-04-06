@@ -15,7 +15,7 @@
       url: "./check_username_availability",
       contentType: "application/json",
       data: JSON.stringify({
-        "username":$("#username_availability").text(txtVal)
+        "username":$("#username").val()
       }),
       type: "POST",
       dataType: "json"
