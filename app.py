@@ -2,6 +2,7 @@ from flask import Flask,render_template,jsonify,request
 from mongoengine import connect
 import uuid
 import base64,io
+from data_model import User
 connect(
     db='website_ui',
     username='admin',
@@ -11,6 +12,7 @@ connect(
 
 app=Flask(__name__)
 
+Usernames=[user.username for user in User.objects().all()]
 @app.route("/")
 def home():
 	return render_template('index.html',flash_message=None)
@@ -30,6 +32,7 @@ def signup():
 		from data_model import User_token
 		user_token=User_token(username=user_data['username'],token=str(uuid.uuid4())+str(uuid.uuid4()))
 		user_token.save()
+		Usernames.append(user_data['username'])
 		return jsonify(response="success")
 	except:
 		return render_template('index.html',flash_message="User id exist")
@@ -46,5 +49,12 @@ def login():
 	else:
 		return render_template('index.html',flash_message="Invalid login id or password")
 
+@app.route('/check_username_availability/', methods=['POST'])
+def check_username_availability(user_name):
+	user_name=request.json['username']
+	if user_name in Usernames:
+		return jsonify(response=1)
+	else:
+		return jsonify(response=0)
 if __name__=="__main__":
 	app.run(debug=True)
