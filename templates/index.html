@@ -20,7 +20,13 @@
       }),
       type: "POST",
       dataType: "json"
-    }).done(function(json){
+    }).done(function(json[response]){
+      if(json[response] == 0){
+                    Result.html('<span class="success">Available</span>');
+                }
+                else if(json[response] > 0){
+                    Result.html('<span class="error">Taken</span>');
+                }
       console.log(json)
     }).fail(function(xhr,status,errorThrown){
       console.log("Error: "+ errorThrown);
