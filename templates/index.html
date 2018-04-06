@@ -8,7 +8,14 @@
   <link rel="stylesheet" href="./static/css/bootstrap.min.css">
   <script src="static/js/jquery-3.3.1.min.js"></script>
   <script src="static/js/bootstrap.min.js"></script>
-   <script> var loadFile = function(event) { var output = document.getElementById('output'); output.src = URL.createObjectURL(event.target.files[0]); }; </script>
+   <script> var loadFile = function(event) { var output = document.getElementById('output'); output.src = URL.createObjectURL(event.target.files[0]); };
+   function check_username_availability() {
+     // body...
+     alert(username);
+   }
+
+
+    </script>
 </head>
 <body style="background-image:url(static/images/yes.png);background-size: 100% 100%;background-repeat: no-repeat;">
   <nav class="navbar navbar-inverse">
@@ -56,7 +63,8 @@
       <div class="form-group row">
         <div class="col-xs-4">
           <label for="username"><b>Username</b></label>
-          <input type="text"  name="username" class="form-control" placeholder="Enter username" required>
+          <input type="text"  name="username" class="form-control" placeholder="Enter username" required value="username"><br>
+          <span>User name available</span>
       </div></div>
       <div class="form-group row">
         <div class="col-xs-4">
