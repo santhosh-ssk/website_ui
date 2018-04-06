@@ -9,7 +9,6 @@
   <script src="static/js/jquery-3.3.1.min.js"></script>
   <script src="static/js/bootstrap.min.js"></script>
    <script> var loadFile = function(event) { var output = document.getElementById('output'); output.src = URL.createObjectURL(event.target.files[0]); };
-    var Result = $('#result');
   $(document).ready(function(){
     $("#username").keyup(function(){
       $.ajax({
@@ -22,11 +21,13 @@
       type: "POST",
       dataType: "json"
     }).done(function(json){
-      if(json['response'] == 0){
-                    Result.html('<span>Available</span>');
+      if(json['response'] == 1){
+                    //alert("available")
+                    $("#result").append('<span style="color: lightgreen">User name is Available</span>');
                 }
-                else if(json['response'] > 0){
-                    Result.html('<span>Taken</span>');
+      else if(json['response'] == 0){
+                    //alert("taken")
+                    $("#result").append('<span style="color: red">sorry user name not available</span>');
                 }
       console.log(json)
     }).fail(function(xhr,status,errorThrown){
@@ -88,7 +89,7 @@
         <div class="col-xs-4">
           <label for="username"><b>Username</b></label>
           <input type="text"  name="username" class="form-control" placeholder="Enter username" required id="username" ><br>
-          <span id="result" style="color: red"></span>
+          <div id="result" ></div>
       </div></div>
       <div class="form-group row">
         <div class="col-xs-4">
