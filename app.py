@@ -52,7 +52,7 @@ def login():
 @app.route('/check_username_availability', methods=['POST'])
 def check_username_availability():
 	user_name=request.json['username']
-	print(Usernames,request.json)
+	#print(Usernames,request.json)
 	if user_name not in Usernames:
 		return jsonify(response=1)
 	else:
