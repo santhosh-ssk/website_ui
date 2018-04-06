@@ -9,11 +9,11 @@
   <script src="static/js/jquery-3.3.1.min.js"></script>
   <script src="static/js/bootstrap.min.js"></script>
    <script> var loadFile = function(event) { var output = document.getElementById('output'); output.src = URL.createObjectURL(event.target.files[0]); };
-   function check_username_availability() {
-     // body...
-     alert("username");
-   }
-
+  $(document).ready(function(){
+    $("#username").keypress(function(){
+        $("#username_availability").text("username available");
+    });
+});
 
     </script>
 </head>
@@ -63,8 +63,8 @@
       <div class="form-group row">
         <div class="col-xs-4">
           <label for="username"><b>Username</b></label>
-          <input type="text"  name="username" class="form-control" placeholder="Enter username" required  onchange="check_username_availability()"><br>
-          <span>User name available</span>
+          <input type="text"  name="username" class="form-control" placeholder="Enter username" required id="username" ><br>
+          <span id="username_availability">Username</span>
       </div></div>
       <div class="form-group row">
         <div class="col-xs-4">
