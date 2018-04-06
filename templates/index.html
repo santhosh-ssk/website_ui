@@ -44,28 +44,32 @@
 
                     function initMap() {
                         var uluru = {lat: 20.5937, lng:78.9629 };
-                        var map = new google.maps.Map(document.getElementById('map'), {
+                        Home_map = new google.maps.Map(document.getElementById('map'), {
                         zoom: 4,
                         center: uluru
                         });
-                        var marker=new google.maps.Marker({position:uluru,map:map});
+                        Home_marker=new google.maps.Marker({position:uluru,map:Home_map});
                     }
                     
                     function myHomeLocation()
                     {
-                        map = new google.maps.Map(document.getElementById('map'), {center: {lat: 20.5937, lng: 78.9629},zoom: 21});
+                        //map = new google.maps.Map(document.getElementById('map'), {center: {lat: 20.5937, lng: 78.9629},zoom: 21});
                         infoWindow = new google.maps.InfoWindow;
                         if (navigator.geolocation) 
 				                {
           			    	      navigator.geolocation.getCurrentPosition(function(position) 
 					        {
-                                var h_icon={url:'static/images/hospital.png',scaledSize: new google.maps.Size(50, 50)};
+                                var h_icon={url:'static/images/home.png',scaledSize: new google.maps.Size(50, 50)};
             				    var pos = {lat: position.coords.latitude,lng: position.coords.longitude};
-					            map.setCenter(pos);
-       	    				    var marker=new google.maps.Marker({position:pos,map:map,icon:h_icon});
-            				    infoWindow.setPosition(pos);
+					            Home_map.setCenter(pos);
+       	    				    Home_map.setZoom(16);
+                                Home_marker.setPosition(pos);
+                                Home_marker.setIcon(h_icon);
+                                   //var marker=new google.maps.Marker({position:pos,map:map,icon:h_icon});
+            				    
+                                infoWindow.setPosition(pos);
             				    infoWindow.setContent('Your Home.');
-            				    infoWindow.open(map);
+            				    infoWindow.open(Home_map);
           				    }, function() {
             					handleLocationError(true, infoWindow, map.getCenter());
           				    });
