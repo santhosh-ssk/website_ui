@@ -10,8 +10,9 @@
   <script src="static/js/bootstrap.min.js"></script>
    <script> var loadFile = function(event) { var output = document.getElementById('output'); output.src = URL.createObjectURL(event.target.files[0]); };
   $(document).ready(function(){
-    $("#username").keypress(function(){
-        $("#username_availability").text("username available");
+    $("#username").keyup(function(){
+      var txtVal = this.value; 
+        $("#username_availability").text(txtVal);
     });
 });
 
@@ -64,7 +65,7 @@
         <div class="col-xs-4">
           <label for="username"><b>Username</b></label>
           <input type="text"  name="username" class="form-control" placeholder="Enter username" required id="username" ><br>
-          <span id="username_availability">Username</span>
+          <span id="username_availability" style="color: red"></span>
       </div></div>
       <div class="form-group row">
         <div class="col-xs-4">
