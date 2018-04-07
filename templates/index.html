@@ -41,71 +41,7 @@
             <div class="row">
                 <div id=map></div>
                 <script>
-
-                    function initMap() {
-                        var loc=myCurrentLocation();
-                        Home_map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 4,
-                        center: loc
-                        });
-                        Home_marker=new google.maps.Marker({position:loc,map:Home_map});
-                    }
-
-                    function nearByShops()
-                    {
-                        $.ajax({
-                            url:"./api/vi/list_shops/"+toString(mapCurrentLocation.lat)+"/"+toString(mapCurrentLocation.lng),
-                            contentType:"application/json",
-                            data:JSON.stringify({
-                                "user_id":"Natarajan"
-                            }),
-                            type:"POST",
-                            dataType:"json"
-                        }).done(function(json){
-                            console.log(json);
-                        }).fail(function(xhr,status,errorThrown){
-                            console.log(status);
-                            console.log(errorThrown);
-                            console.dir(xhr);
-                        })
-                    }
-                    
-                    function myCurrentLocation()
-                    {
-                        if (navigator.geolocation) 
-				        {
-          			    	navigator.geolocation.getCurrentPosition(function(position) 
-					        {
-                                var mapCurrentLocation = {lat: position.coords.latitude,lng: position.coords.longitude};
-                                var curr_loc="lat: "+mapCurrentLocation.lat+",lng: "+mapCurrentLocation.lng;
-                                return(curr_loc);
-                            });
-        			    } 
-				        else 
-				        {
-          				    return null;
-        			    }
-                    }
-
-                    /*function myHomeLocation()
-                    {
-                        infoWindow = new google.maps.InfoWindow;
-                        if (navigator.geolocation) 
-				                {
-          			    	      navigator.geolocation.getCurrentPosition(function(position) 
-					            {
-                                var h_icon={url:'static/images/home.png',scaledSize: new google.maps.Size(50, 50)};
-            				    var pos = {lat: position.coords.latitude,lng: position.coords.longitude};
-					            Home_map.setCenter(pos);
-       	    				    Home_map.setZoom(16);
-                                Home_marker.setPosition(pos);
-                                Home_marker.setIcon(h_icon);
-            				    
-                                infoWindow.setPosition(pos);
-            				    infoWindow.setContent('Your Home.');
-            				    infoWindow.open(Home_map);
-
-                                Home_map.setOptions({styles:[
+                    Home_styles=[
                                             {
                                                 "featureType": "poi",
                                                 "stylers": [
@@ -138,66 +74,60 @@
                                             }
                                             
                                     ]
-                                    });
-          				    }, function() {
-            					handleLocationError(true, infoWindow, map.getCenter());
-          				    });
+
+                    function initMap() {
+                        
+                        var center= {'lat':20.5937,'lng':78.9629}
+                        Home_map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 4,
+                        center: {'lat':20.5937,'lng':78.9629}
+                        });
+                        Home_marker=new google.maps.Marker({position:center,map:Home_map});
+                        geolocation_flag=true;
+                        if (navigator.geolocation) 
+				        {
+          			    	navigator.geolocation.getCurrentPosition(function(position) 
+					        {
+                                mapCurrentLocation = {'lat': position.coords.latitude,'lng': position.coords.longitude};
+                                Home_map.setCenter(mapCurrentLocation);
+                                Home_map.setZoom(16);
+                                Home_marker.setPosition(mapCurrentLocation);
+                                var h_icon={url:'static/images/home.png',scaledSize: new google.maps.Size(50, 50)};
+                                Home_marker.setIcon(h_icon);
+                                Home_map.setOptions({styles:Home_styles});
+                            });
         			    } 
 				        else 
 				        {
-          				    handleLocationError(false, infoWindow, map.getCenter());
+                            geolocation_flag=false;
+                            alert("Geolocation serviece does not works in your browser");
         			    }
-                    }*/
 
-                    function myHomeLocation()
-                    {
-                        infoWindow = new google.maps.InfoWindow;
-                        var pos=myCurrentLocation();
-                        var h_icon={url:'static/images/home.png',scaledSize: new google.maps.Size(50, 50)};
-                        Home_map.setCenter(pos);
-                        Home_map.setZoom(16);
-                        Home_marker.setPosition(pos);
-                        Home_marker.setIcon(h_icon);
-            				    
-                        infoWindow.setPosition(pos);
-            		    infoWindow.setContent('Your Home.');
-            			infoWindow.open(Home_map);
-
-                        Home_map.setOptions({styles:[
-                                            {
-                                                "featureType": "poi",
-                                                "stylers": [
-                                                { "visibility": "off" }
-                                                ]
-                                            },
-                                            {
-                                                "featureType": "poi.attraction",
-                                                "stylers": [
-                                                { "visibility": "on" }
-                                                ]
-                                            },
-                                            {
-                                                "featureType": "poi.park",
-                                                "stylers": [
-                                                { "visibility": "on" }
-                                                ]
-                                            },
-                                            {
-                                                "featureType": "poi.medical",
-                                                "stylers": [
-                                                { "visibility": "on" }
-                                                ]
-                                            },
-                                            {
-                                                "featureType": "poi.place_of_worship",
-                                                "stylers": [
-                                                { "visibility": "on" }
-                                                ]
-                                            }
-                                            
-                                        ]
-                                    });
                     }
+
+                    function nearByShops()
+                    {
+                        if(mapCurrentLocation && geolocation_flag)
+                            $.ajax({
+                                url:"./api/vi/list_shops/"+mapCurrentLocation['lat']+"/"+mapCurrentLocation['lng'],
+                                contentType:"application/json",
+                                data:JSON.stringify({
+                                    "user_id":"Natarajan"
+                                }),
+                                type:"POST",
+                                dataType:"json"
+                            }).done(function(json){
+                                console.log(json);
+                            }).fail(function(xhr,status,errorThrown){
+                                console.log(status);
+                                console.log(errorThrown);
+                                console.dir(xhr);
+                            })
+                        else
+                            alert("service not available");
+                    }
+                    
+
                 </script>
                 <script async defer
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4bEjeJlY-pprft7C_p0LM0oPC6yYX468&callback=initMap">
