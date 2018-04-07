@@ -30,7 +30,7 @@
                        <nav class="navbar navbar-default">
                            <ul class="nav navbar-nav">
                                <li><a href="#" onclick="myHomeLocation()">Home</a></li>
-                               <li><a href="#">Shops</a></li>
+                               <li><a href="#" onclick="nearByShops()">Shops</a></li>
                                <li><a href="#">Hospitals</a></li>
                                <li><a href="#">Restaurants</a></li>
                            </ul>
@@ -50,22 +50,61 @@
                         });
                         Home_marker=new google.maps.Marker({position:uluru,map:Home_map});
                     }
+
+                    function nearByShops()
+                    {
+                        $.ajax({
+                            url:"./api/vi/list_shops/"+toString(mapCurrentLocation.lat)+"/"+toString(mapCurrentLocation.lng),
+                            contentType:"application/json",
+                            data:JSON.stringify({
+                                "user_id":"Natarajan"
+                            }),
+                            type:"POST",
+                            dataType:"json"
+                        }).done(function(json){
+                            console.log(json);
+                        }).fail(function(xhr,status,errorThrown){
+                            console.log(status);
+                            console.log(errorThrown);
+                            console.dir(xhr);
+                        })
+                    }
                     
+                    function myCurrentLocation()
+                    {
+                        infoWindow = new google.maps.InfoWindow;
+                        if (navigator.geolocation) 
+				        {
+          			    	navigator.geolocation.getCurrentPosition(function(position) 
+					        {
+                                mapCurrentLocation = {lat: position.coords.latitude,lng: position.coords.longitude};
+                                Home_map.setCenter(mapCurrentLocation);
+       	    				    Home_map.setZoom(16);
+                                var C_loc="Lat :"+mapCurrentLocation.lat+"\nLng:"+mapCurrentLocation.lng;
+                                alert(C_loc);
+                            },function() {
+            					handleLocationError(true, infoWindow, map.getCenter());
+          				    });
+        			    } 
+				        else 
+				        {
+          				    handleLocationError(false, infoWindow, map.getCenter());
+        			    }
+                    }
+
                     function myHomeLocation()
                     {
-                        //map = new google.maps.Map(document.getElementById('map'), {center: {lat: 20.5937, lng: 78.9629},zoom: 21});
                         infoWindow = new google.maps.InfoWindow;
                         if (navigator.geolocation) 
 				                {
           			    	      navigator.geolocation.getCurrentPosition(function(position) 
-					        {
+					            {
                                 var h_icon={url:'static/images/home.png',scaledSize: new google.maps.Size(50, 50)};
             				    var pos = {lat: position.coords.latitude,lng: position.coords.longitude};
 					            Home_map.setCenter(pos);
        	    				    Home_map.setZoom(16);
                                 Home_marker.setPosition(pos);
                                 Home_marker.setIcon(h_icon);
-                                   //var marker=new google.maps.Marker({position:pos,map:map,icon:h_icon});
             				    
                                 infoWindow.setPosition(pos);
             				    infoWindow.setContent('Your Home.');

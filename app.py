@@ -12,9 +12,9 @@ def home():
 def map():
 	return render_template('first_map.html')
 
-@app.route('/api/vi/list_shops/<lat>/<log>')
+@app.route('/api/vi/list_shops/<lat>/<log>',methods=['POST'])
 def list_shops(lat,log):
-	print(lat,log)
+	print(lat,log,request.json)
 	resp=requests.request("GET","https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+lat+","+log+"&radius=1000&type=restaurant&key="+maps_api_key)
 	locations=json.loads((resp.content).decode())['results']
 	respons=list()
