@@ -43,12 +43,12 @@
                 <script>
 
                     function initMap() {
-                        var uluru = {lat: 20.5937, lng:78.9629 };
+                        var loc=myCurrentLocation();
                         Home_map = new google.maps.Map(document.getElementById('map'), {
                         zoom: 4,
-                        center: uluru
+                        center: loc
                         });
-                        Home_marker=new google.maps.Marker({position:uluru,map:Home_map});
+                        Home_marker=new google.maps.Marker({position:loc,map:Home_map});
                     }
 
                     function nearByShops()
@@ -72,27 +72,22 @@
                     
                     function myCurrentLocation()
                     {
-                        infoWindow = new google.maps.InfoWindow;
                         if (navigator.geolocation) 
 				        {
           			    	navigator.geolocation.getCurrentPosition(function(position) 
 					        {
-                                mapCurrentLocation = {lat: position.coords.latitude,lng: position.coords.longitude};
-                                Home_map.setCenter(mapCurrentLocation);
-       	    				    Home_map.setZoom(16);
-                                var C_loc="Lat :"+mapCurrentLocation.lat+"\nLng:"+mapCurrentLocation.lng;
-                                alert(C_loc);
-                            },function() {
-            					handleLocationError(true, infoWindow, map.getCenter());
-          				    });
+                                var mapCurrentLocation = {lat: position.coords.latitude,lng: position.coords.longitude};
+                                var curr_loc="lat: "+mapCurrentLocation.lat+",lng: "+mapCurrentLocation.lng;
+                                return(curr_loc);
+                            });
         			    } 
 				        else 
 				        {
-          				    handleLocationError(false, infoWindow, map.getCenter());
+          				    return null;
         			    }
                     }
 
-                    function myHomeLocation()
+                    /*function myHomeLocation()
                     {
                         infoWindow = new google.maps.InfoWindow;
                         if (navigator.geolocation) 
@@ -152,6 +147,56 @@
 				        {
           				    handleLocationError(false, infoWindow, map.getCenter());
         			    }
+                    }*/
+
+                    function myHomeLocation()
+                    {
+                        infoWindow = new google.maps.InfoWindow;
+                        var pos=myCurrentLocation();
+                        var h_icon={url:'static/images/home.png',scaledSize: new google.maps.Size(50, 50)};
+                        Home_map.setCenter(pos);
+                        Home_map.setZoom(16);
+                        Home_marker.setPosition(pos);
+                        Home_marker.setIcon(h_icon);
+            				    
+                        infoWindow.setPosition(pos);
+            		    infoWindow.setContent('Your Home.');
+            			infoWindow.open(Home_map);
+
+                        Home_map.setOptions({styles:[
+                                            {
+                                                "featureType": "poi",
+                                                "stylers": [
+                                                { "visibility": "off" }
+                                                ]
+                                            },
+                                            {
+                                                "featureType": "poi.attraction",
+                                                "stylers": [
+                                                { "visibility": "on" }
+                                                ]
+                                            },
+                                            {
+                                                "featureType": "poi.park",
+                                                "stylers": [
+                                                { "visibility": "on" }
+                                                ]
+                                            },
+                                            {
+                                                "featureType": "poi.medical",
+                                                "stylers": [
+                                                { "visibility": "on" }
+                                                ]
+                                            },
+                                            {
+                                                "featureType": "poi.place_of_worship",
+                                                "stylers": [
+                                                { "visibility": "on" }
+                                                ]
+                                            }
+                                            
+                                        ]
+                                    });
                     }
                 </script>
                 <script async defer
